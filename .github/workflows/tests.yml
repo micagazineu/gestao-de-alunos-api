@@ -2,12 +2,14 @@ name: Testes de API
 
 on:
   push:
-    branches: [main]
+    branches: [main, master]
   pull_request:
-    branches: [main]
+    branches: [main, master]
+  workflow_dispatch:
 
 jobs:
   test:
+    name: Execução de Testes Automatizados (Mocha, SuperTest, Chai)
     runs-on: ubuntu-latest
 
     services:
@@ -34,7 +36,11 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
-      - name: Executar testes
+      - name: Executar testes automatizados
         run: npm test
         env:
+          PORT: 3000
           MONGODB_URI: mongodb://127.0.0.1:27017/gestao-de-alunos-test
+          JWT_SECRET: segredo-dev-gestao-de-alunos
+          ADMIN_EMAIL: admin@escola.com
+          ADMIN_PASSWORD: admin123

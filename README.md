@@ -260,3 +260,54 @@ curl -X POST http://localhost:3000/api/alunos/aluno-ana-souza/trabalhos \
 
 > Novos registros criados via API recebem ids no formato UUID (gerados com
 > `crypto.randomUUID()`), diferente dos ids legíveis usados nos dados fake acima.
+
+---
+
+## 🧪 Testes Automatizados de API
+
+O projeto conta com uma suíte completa de testes automatizados de integração e aceitação cobrindo todo o ciclo de vida da aplicação.
+
+### 🛠️ Tecnologias de Teste
+
+- **Mocha**: Framework de testes e runner assíncrono.
+- **SuperTest**: Biblioteca para disparar requisições HTTP e validar respostas contra a aplicação Express.
+- **Chai**: Biblioteca de asserções (`expect`) expressivas e legíveis.
+- **Dotenv**: Gerenciamento de variáveis de ambiente (`.env`).
+- **Data-Driven Testing (DDT)**: Parametrização dinâmica com dados externalizados em arquivo JSON.
+
+### 📋 Itens Implementados
+
+1. **Automação do Fluxo Completo**:
+   - Autenticação como Administrador (`loginAdmin`).
+   - Cadastro de novo aluno com token de admin (`POST /api/admin/alunos`).
+   - Matrícula do aluno em disciplina (`POST /api/admin/disciplinas/:id/matriculas`).
+   - Autenticação como o Aluno recém-criado (`loginUsuario`).
+   - Registro de entrega de trabalho pelo próprio aluno (`POST /api/alunos/:id/trabalhos`).
+   - Consulta e validação da entrega de trabalhos (`GET /api/alunos/:id/trabalhos`).
+
+2. **Helpers de Autenticação (`test/helpers/login.helper.js`)**:
+   - `loginAdmin(credentials)`: helper reutilizável para autenticar como admin e obter o token.
+   - `loginUsuario(credentials)` / `loginAluno(credentials)`: helper reutilizável para autenticar alunos e obter token.
+   - Helpers complementares de requisição (`cadastrarAluno`, `matricularAluno`, `registrarEntregaTrabalho`).
+
+3. **Data-Driven Testing (DDT) (`test/data/testData.json`)**:
+   - Dados de testes totalmente desacoplados do código de teste.
+   - Suíte `test/dataDriven.test.js` iterando dinamicamente sobre arrays de alunos, trabalhos e casos de validação (campos obrigatórios).
+
+4. **Variáveis de Ambiente com Dotenv**:
+   - Suporte ao arquivo `.env` para parametrização de portas, conexão com MongoDB, segredo JWT e credenciais de admin.
+   - Arquivo `.env.example` versionado como referência.
+
+5. **Pipeline de Integração Contínua (GitHub Actions)**:
+   - Configurada em `.github/workflows/tests.yml`.
+   - Inicializa serviço do MongoDB 7 com healthcheck.
+   - Instala dependências via `npm ci` no Node.js 20.
+   - Executa os testes automatizados com `npm test`.
+
+### 🚀 Como Executar os Testes
+
+Certifique-se de que o MongoDB está em execução e rode:
+
+```bash
+npm test
+```

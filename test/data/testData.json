@@ -1,0 +1,113 @@
+{
+  "admin": {
+    "email": "admin@escola.com",
+    "senha": "admin123"
+  },
+  "disciplinaPadrao": {
+    "id": "disciplina-matematica",
+    "nome": "Matemática",
+    "codigo": "MAT101"
+  },
+  "alunoFluxoPrincipal": {
+    "nome": "Michaella Gazineu",
+    "email": "micagazineu@hotmail.com",
+    "matricula": "2024901",
+    "senha": "alunosenha123"
+  },
+  "trabalhoFluxoPrincipal": {
+    "disciplinaId": "disciplina-matematica",
+    "titulo": "Implementação de Algoritmos em Grafos",
+    "descricao": "Entrega do projeto prático de teoria dos grafos com Dijkstra e BFS."
+  },
+  "alunosDataDriven": [
+    {
+      "nome": "Lucas Martins",
+      "email": "lucas.martins@posgraduacao.com",
+      "matricula": "2024101",
+      "senha": "senhaAluno123",
+      "trabalho": {
+        "disciplinaId": "disciplina-matematica",
+        "titulo": "Lista 1 - Álgebra Linear e Matrizes",
+        "descricao": "Resolução dos exercícios do capítulo 1 sobre determinantes e sistemas lineares."
+      }
+    },
+    {
+      "nome": "Mariana Costa",
+      "email": "mariana.costa@posgraduacao.com",
+      "matricula": "2024102",
+      "senha": "senhaAluno456",
+      "trabalho": {
+        "disciplinaId": "disciplina-matematica",
+        "titulo": "Trabalho Prático - Estatística Descritiva",
+        "descricao": "Análise exploratória com gráficos boxplot e cálculo de desvio padrão."
+      }
+    },
+    {
+      "nome": "Rafael Oliveira",
+      "email": "rafael.oliveira@posgraduacao.com",
+      "matricula": "2024103",
+      "senha": "senhaAluno789",
+      "trabalho": {
+        "disciplinaId": "disciplina-matematica",
+        "titulo": "Projeto Semestral - Modelagem Matemática",
+        "descricao": "Modelagem de crescimento populacional utilizando equações diferenciais."
+      }
+    }
+  ],
+  "cenariosValidacaoAluno": [
+    {
+      "descricao": "deve rejeitar cadastro sem o campo 'nome'",
+      "dados": {
+        "email": "invalido1@posgraduacao.com",
+        "matricula": "999901",
+        "senha": "123"
+      },
+      "statusEsperado": 400
+    },
+    {
+      "descricao": "deve rejeitar cadastro sem o campo 'email'",
+      "dados": {
+        "nome": "Sem Email",
+        "matricula": "999902",
+        "senha": "123"
+      },
+      "statusEsperado": 400
+    },
+    {
+      "descricao": "deve rejeitar cadastro sem o campo 'matricula'",
+      "dados": {
+        "nome": "Sem Matricula",
+        "email": "invalido3@posgraduacao.com",
+        "senha": "123"
+      },
+      "statusEsperado": 400
+    },
+    {
+      "descricao": "deve rejeitar cadastro sem o campo 'senha'",
+      "dados": {
+        "nome": "Sem Senha",
+        "email": "invalido4@posgraduacao.com",
+        "matricula": "999904"
+      },
+      "statusEsperado": 400
+    }
+  ],
+  "cenariosValidacaoTrabalho": [
+    {
+      "descricao": "deve rejeitar registro de trabalho sem 'disciplinaId'",
+      "dados": {
+        "titulo": "Trabalho Sem Disciplina",
+        "descricao": "Descrição qualquer"
+      },
+      "statusEsperado": 400
+    },
+    {
+      "descricao": "deve rejeitar registro de trabalho sem 'titulo'",
+      "dados": {
+        "disciplinaId": "disciplina-matematica",
+        "descricao": "Descrição qualquer"
+      },
+      "statusEsperado": 400
+    }
+  ]
+}
